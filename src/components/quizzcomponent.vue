@@ -5,19 +5,22 @@
 
     <div class="headerWrapper">
 
-            <div class="questNbr" v-if="questions.length > 0 && questionNumber <= 20">
-                {{ questionNumber }}/20
-              </div>
+      <div class="questNbr" v-if="questions.length > 0 && questionNumber <= 20">
+          {{ questionNumber }}/20
+      </div>
 
       <div class="githubLogoCircle">
         <img src="../assets/githubLogo.png" alt="Logo Github" title="Github Project" class="githubLogo">
       </div>
+
     </div>
 
     <div class="titleWrapper" v-if="questions.length <= 0">
+
         <div class="title">POUR</div>
         <div class="title">OU</div>
         <div class="title">CONTRE</div>
+
     </div>
 
     <div class="subTitleWrapper" v-if="questions.length <= 0">
@@ -48,6 +51,7 @@
 
                 <div v-on:click=" storeData(question.id, question.yes + 1, question.no, true)"
                 v-bind:class=" { forAgainstButton: boolAnswer == 0, forAgainstButtonDisabled: boolAnswer == 1, forAgainstButtonClicked : boolAnswer == 2 } ">
+
                     <div v-if="boolAnswer == 2">
                         {{
                         Math.round(((question.yes + 1) / (question.yes + question.no + 1)) * 100)
@@ -64,11 +68,13 @@
 
                 <div :disabled="boolAnswer == 2" v-on:click=" storeData(question.id, question.yes, question.no + 1, false)"
                 v-bind:class="{forAgainstButton: boolAnswer == 0, forAgainstButtonDisabled : boolAnswer == 2, forAgainstButtonClicked : boolAnswer == 1 }">
+
                     <div v-if="boolAnswer == 1">
                       {{
                         Math.round(((question.no + 1) / (question.yes + question.no + 1)) * 100)
                       }}%
                     </div>
+
                     <div style="font-weight: bold;">CONTRE</div>
 
                     <div v-if="boolAnswer == 1">
@@ -76,15 +82,16 @@
                     </div>
 
                 </div>
-              </div>
 
             </div>
 
-                <div v-if="questions.length > 0 && questionNumber < 20 && !end" v-on:click="getRandomQuestion()">
-                    <div class="nextButton">
-                      QUESTION SUIVANTE
-                    </div>
+        </div>
+
+            <div v-if="questions.length > 0 && questionNumber < 20 && !end" v-on:click="getRandomQuestion()">
+                <div class="nextButton">
+                  QUESTION SUIVANTE
                 </div>
+            </div>
 
             <div class="finalDivWrapper">
 
@@ -216,15 +223,13 @@ export default defineComponent({
                 error
               )
             })
-        }
-      )
+        })
     }
   } // close methods
 })
 </script>
 <!-- Style !-->
 <style scoped>
-
 /* Title */
 .titleWrapper {
   display: flex;
@@ -257,7 +262,6 @@ export default defineComponent({
 }
 
 /* Header */
-
 .questNbr {
   display: flex;
   border: solid 4px var(--globalColor);
@@ -400,7 +404,7 @@ export default defineComponent({
 
 .forAgainstButtonClicked {
   margin-top:-6%;
-  min-width: 25vw;
+  min-width: 22vw;
   height:auto;
   background: rgba(128, 85, 161, 0.6);
   border: solid 1px var(--globalColor);
@@ -425,12 +429,8 @@ export default defineComponent({
 }
 
 /* Next question */
-
 .nextButton {
-  position: absolute;
-  left:0;
-  right:0;
-  bottom: 100px;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   width:280px;
@@ -475,6 +475,7 @@ export default defineComponent({
   display:flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   gap:60px;
   margin-top:10px;
   align-items: center;
@@ -502,7 +503,7 @@ a:hover {
   color : var(--globalBg1);
 }
 
-@media screen and (max-width:650px) {
+@media screen and (max-width:700px) {
 /*menu screen*/
   * {
     font-size: 4vw;
@@ -517,8 +518,16 @@ a:hover {
     margin-top:1rem;
   }
 
+  .question {
+    font-size: 35px;
+  }
+
   .forAgainstButton {
     min-width: 17vw;
+  }
+
+  .nextButton {
+    width:39vw;
   }
 }
 </style>

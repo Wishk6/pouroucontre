@@ -9,9 +9,11 @@
           {{ questionNumber }}/20
       </div>
 
-      <div class="githubLogoCircle">
-        <img src="../assets/githubLogo.png" alt="Logo Github" title="Github Project" class="githubLogo">
-      </div>
+      <a href="https://github.com/Wishk6/pouroucontre" target="_blanck">
+        <div class="githubLogoCircle">
+          <img src="../assets/githubLogo.png" alt="Logo Github" title="Github Project" class="githubLogo">
+        </div>
+      </a>
 
     </div>
 
@@ -103,7 +105,7 @@
                 </div>
 
                 <div v-if="showStats" class="resultButton">
-                    <a href="http://localhost:8081/">MENU</a>
+                    <a href="https://pouroucontre.cbym5024.odns.fr">MENU</a>
                 </div>
 
             </div>
@@ -138,7 +140,7 @@ export default defineComponent({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       }
-      fetch('http://localhost:3000/api/question', requestOptions)
+      fetch('https://pouroucontre.cbym5024.odns.fr/backend/api/question', requestOptions)
         .then(async (response) => {
           const data = await response.json()
           this.questions = data
@@ -195,7 +197,6 @@ export default defineComponent({
     updateData: async function () {
       /* update data in Db */
       this.showStats = true
-      console.log(this.answers)
       this.answers.forEach(
         (element: { id: number; yes: number; no: number }) => {
           const requestOptions = {
@@ -209,7 +210,7 @@ export default defineComponent({
               }
             })
           }
-          fetch('http://localhost:3000/api/question/update', requestOptions)
+          fetch('https://pouroucontre.cbym5024.odns.fr/backend/api/question/update', requestOptions)
             .then(async (response) => {
               const data = await response.json()
               if (!response.ok) {

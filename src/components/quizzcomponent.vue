@@ -4,7 +4,7 @@
 <div class="main">
 
     <div class="headerWrapper">
-
+      
       <div class="questNbr" v-if="questions.length > 0 && questionNumber <= 20">
           {{ questionNumber }}/20
       </div>
@@ -14,6 +14,10 @@
           <img src="../assets/githubLogo.png" alt="Logo Github" title="Github Project" class="githubLogo">
         </div>
       </a>
+
+      <div v-if="questions.length <=0" class="information">
+        <div class="informationText">VOS REPONSES SERONT ENREGISTREES <div>ANNONYMEMENT</div></div>
+    </div>
 
     </div>
 
@@ -28,6 +32,9 @@
     <div class="subTitleWrapper" v-if="questions.length <= 0">
         <div class="subTitle">Êtes vous en accord avec la majorité ?</div>
     </div>
+    
+
+    
 
     <div v-if="questions.length <= 0" class="startButtonWrapper">
 
@@ -38,6 +45,7 @@
         </div>
 
     </div>
+ 
 
         <div v-if="questions.length > 0 && questionNumber <= 20" class="secondDiv">
 
@@ -99,9 +107,9 @@
 
                 <div v-if="end && !showStats" v-on:click="updateData()" class="resultButton">Voir les résultats</div>
 
-                <div v-if="showStats">
+                <div v-if="showStats" class="stats">
                     Sur vos 20 réponses, {{ medium }} sont en accord avec la majorité,
-                    soit {{ Math.round((medium / 20) * 100) }}%
+                    soit {{ Math.round((medium / 20) * 100) }}%.
                 </div>
         
                 <a v-if="showStats" class="resultButton" href="https://pouroucontre.cbym5024.odns.fr">
